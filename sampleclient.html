@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>websocket test</title>
+</head>
+<body>
+<div id="frame" style="width: 400px; height: 400px; background-color: #999;">
+</div>
+<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script>
+$(function () {
+  var ws = new WebSocket("ws://localhost:8080");
+  ws.onmessage = function (e) {
+    console.dir(e);
+  }
+
+  $("#frame").click(function (e) {
+    var clicked_point = {
+      x: e.pageX,
+      y: e.pageY
+    };
+    ws.send(JSON.stringify(clicked_point));
+  });
+});
+</script>
+
+</body>
+</html>
